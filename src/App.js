@@ -41,27 +41,28 @@ export default class App extends Component {
     this.setState({ filteredTodos: newFilteredTodosArr });
   }
 
-  // filterHandler() {
-  //   //ovu func možemo raspisati i u useEffect, ali ovako je odvojena zasebna metoda koju pozivamo u useEffectu
-  //   if (this.state.status === "completed") {
-  //     const completed = this.state.todos.filter(
-  //       (todo) => todo.completed === true
-  //     );
-  //     this.setfilteredTodos(completed);
-  //   } else if (this.state.status === "uncompleted") {
-  //     const uncompleted = this.state.todos.filter(
-  //       (todo) => todo.completed === false
-  //     );
-  //     this.setfilteredTodos(uncompleted);
-  //   } else {
-  //     const todos = this.state.todos;
-  //     this.setfilteredTodos(todos);
-  //   }
-  // }
+  filterHandler() {
+    //ovu func možemo raspisati i u useEffect, ali ovako je odvojena zasebna metoda koju pozivamo u useEffectu
+    if (this.state.status === "completed") {
+      const completed = this.state.todos.filter(
+        (todo) => todo.completed === true
+      );
+      this.setFilteredTodos(completed);
+    } else if (this.state.status === "uncompleted") {
+      const uncompleted = this.state.todos.filter(
+        (todo) => todo.completed === false
+      );
+      this.setFilteredTodos(uncompleted);
+    } else {
+      const todos = this.state.todos;
+      this.setFilteredTodos(todos);
+    }
+  }
 
-  // componentDidUpdate() { //baca mi error odi
-  //   this.filterHandler();
-  // }
+  componentDidUpdate() {
+    //baca mi error odi
+    this.filterHandler();
+  }
 
   render() {
     return (
