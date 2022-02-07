@@ -22,19 +22,13 @@ const TodoList = ({
   // };
 
   return (
-    <div className="todo-container">
-      <ul className="todo-list">
+    <div className='todo-container'>
+      <ul className='todo-list'>
         {filteredTodos.map(
           (
             todo //mapira kroz filteredTodos umisto samo Todos pa ce ovisno i switchu prkazati filtriranu todos array
           ) => (
-            <Todo
-              todo={todo}
-              setTodos={setTodos}
-              todos={todos}
-              text={todo.text}
-              key={todo.id}
-            />
+            <Todo todo={todo} text={todo.text} key={todo.id} />
           )
         )}
       </ul>
