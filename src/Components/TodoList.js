@@ -24,7 +24,7 @@ const TodoList = ({
   return (
     <div className='todo-container'>
       <ul className='todo-list'>
-        {filteredTodos.map(
+        {filteredTodos?.map(
           (
             todo //mapira kroz filteredTodos umisto samo Todos pa ce ovisno i switchu prkazati filtriranu todos array
           ) => (

@@ -7,7 +7,7 @@ const Todo = ({ text, todo }) => {
   const deleteHandler = (todos, setTodos) => {
     const filterDeletedTodo = todos.filter((el) => el.id !== todo.id);
     console.log(filterDeletedTodo); //array umanjena za filtrirani todo
-    setTodos(filterDeletedTodo);
+    kontekst.setTodos(filterDeletedTodo);
   };
   const completeHandler = (todos, setTodos) => {
     const filterCompletedTodo = todos.map((item) => {
@@ -17,7 +17,7 @@ const Todo = ({ text, todo }) => {
       return item;
     });
     console.log(filterCompletedTodo); //array sa svim todosima samo ce biti prominjem property is completed: false
-    setTodos(filterCompletedTodo);
+    kontekst.setTodos(filterCompletedTodo);
   };
 
   return (

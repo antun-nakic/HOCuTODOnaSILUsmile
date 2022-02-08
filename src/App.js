@@ -3,10 +3,6 @@ import "./App.css";
 import Form from "./Components/Form";
 import TodoList from "./Components/TodoList";
 
-const glavnoStanjeHOC = (Virtualac, Parametri) => {
-  return <Virtualac {...Parametri} />;
-};
-
 export const mojKontekst = React.createContext({});
 
 export default class App extends Component {
@@ -25,19 +21,20 @@ export default class App extends Component {
     this.setStatus = this.setStatus.bind(this);
     this.setFilteredTodos = this.setFilteredTodos.bind(this);
 
+    //pročistio sam malo parametre, sada šaljem samo metode
     this.Parametri = {
-      inputText: this.state.inputText,
-      todos: this.state.todos,
       setInputText: this.setInputText,
       setTodos: this.setTodos,
       setStatus: this.setStatus,
       setFilteredTodos: this.setFilteredTodos,
-      filteredTodos: this.state.filteredTodos,
-      status: this.state.status,
     };
     this.prevState = {};
-    this.FormaIzHOCa = glavnoStanjeHOC(Form, this.Parametri);
-    this.TodoListIzHOCa = glavnoStanjeHOC(TodoList, this.Parametri);
+  }
+
+  //primjetite da se state uvijek uzima sa novim stanjem prilikom kreacije nove
+  //komponente iz HOC-a.
+  glavnoStanjeHOC(Virtualac) {
+    return <Virtualac {...this.Parametri} {...this.state} />;
   }
 
   setInputText(text) {
@@ -119,8 +116,11 @@ export default class App extends Component {
             status={this.state.status}
           />
         </div>
-
-        {this.TodoListIzHOCa}
+        {/* Primjetite da svaki put kad dolazi do novog iscrtavanja App-a, ponovno instanciramo HOC komponentu.
+          To je više manje ok put jer nam HOKica ionako glupa komponenta.
+          Da smo imali pametnu HOKicu posložili bi stvati drugačije i ona bi se mijenjala na temelju promjene
+           ili propa ili stanja, te bi je i pozivali sa < />*/}
+        {this.glavnoStanjeHOC(TodoList)}
       </mojKontekst.Provider>
     );
   }
